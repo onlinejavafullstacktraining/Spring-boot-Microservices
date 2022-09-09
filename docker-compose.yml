@@ -1,0 +1,7 @@
+version: '2'
+# License Service docker configuration
+services:
+  Licensing-service:
+    image: licensing-service:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
