@@ -1,6 +1,6 @@
 [submodule "ConfigurationService"]
 	path = ConfigurationService
-	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/ConfigurationService
+	url = https://github.com/onlinejavafullstacktraining/ConfigurationService
 [submodule "EurekaService"]
 	path = EurekaService
 	url = https://github.com/onlinejavafullstacktraining/EurekaService
