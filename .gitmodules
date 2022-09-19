@@ -3,18 +3,18 @@
 	url = https://github.com/onlinejavafullstacktraining/ConfigurationService.git
 [submodule "EurekaService"]
 	path = EurekaService
-	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/EurekaService.git
+	url = https://github.com/onlinejavafullstacktraining/EurekaService.git
 
 [submodule "LicenseService"]
 	path = LicenseService
-	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/LicenseService.git
+	url = https://github.com/onlinejavafullstacktraining/LicenseService.git
 
 [submodule "OrganizationService"]
 	path = OrganizationService
-	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/OrganizationService.git
+	url = https://github.com/onlinejavafullstacktraining/OrganizationService.git
 
 [submodule "zuulservice"]
 	path = GatewayService
-	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/GatewayService.git
+	url = https://github.com/onlinejavafullstacktraining/GatewayServer.git
 
 
