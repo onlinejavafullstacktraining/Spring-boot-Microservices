@@ -1,6 +1,7 @@
 [submodule "ConfigurationService"]
 	path = ConfigurationService
 	url = https://github.com/onlinejavafullstacktraining/ConfigurationService
+
 [submodule "EurekaService"]
 	path = EurekaService
 	url = https://github.com/onlinejavafullstacktraining/EurekaService
@@ -12,6 +13,10 @@
 [submodule "OrganizationService"]
 	path = OrganizationService
 	url = https://github.com/onlinejavafullstacktraining/OrganizationService
+
+[submodule "zuulservice"]
+	path = GatewayService
+	url = https://github.com/onlinejavafullstacktraining/GatewayServer.git
 
 [submodule "GatewayServer"]
 	path = GatewayServer
