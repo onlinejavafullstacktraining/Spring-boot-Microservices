@@ -18,24 +18,23 @@
         <java.version>11</java.version>
     </properties>
     <modules>
+        <module>ConfigurationService</module>
+        <module>EurekaService</module>
         <module>LicenseService</module>
-
+        <module>OrganizationService</module>
     </modules>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
+        <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.13</version>
+            <configuration>
+                <skip>true</skip>
+            </configuration>
+        </plugin>
         </plugins>
-        <extensions>
-            <extension>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-extension</artifactId>
-                <version>1.4.13</version>
-            </extension>
-        </extensions>
     </build>
 
 </project>

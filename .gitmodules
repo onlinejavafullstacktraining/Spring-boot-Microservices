@@ -1,0 +1,20 @@
+[submodule "ConfigurationService"]
+	path = ConfigurationService
+	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/ConfigurationService
+[submodule "EurekaService"]
+	path = EurekaService
+	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/EurekaService
+
+[submodule "LicenseService"]
+	path = LicenseService
+	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/LicenseService
+
+[submodule "OrganizationService"]
+	path = OrganizationService
+	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/OrganizationService
+
+[submodule "zuulservice"]
+	path = GatewayService
+	url = https://github.com/onlinejavafullstacktraining/Spring-boot-Microservices/GatewayService
+
+
