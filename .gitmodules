@@ -1,20 +1,20 @@
 [submodule "ConfigurationService"]
-	path = ConfigurationService
+	path = Spring-boot-Microservices/ConfigurationService
 	url = https://github.com/onlinejavafullstacktraining/ConfigurationService.git
 [submodule "EurekaService"]
-	path = EurekaService
+	path = Spring-boot-Microservices/EurekaService
 	url = https://github.com/onlinejavafullstacktraining/EurekaService.git
 
 [submodule "LicenseService"]
-	path = LicenseService
+	path = Spring-boot-Microservices/LicenseService
 	url = https://github.com/onlinejavafullstacktraining/LicenseService.git
 
 [submodule "OrganizationService"]
-	path = OrganizationService
+	path = Spring-boot-Microservices/OrganizationService
 	url = https://github.com/onlinejavafullstacktraining/OrganizationService.git
 
 [submodule "zuulservice"]
-	path = GatewayService
+	path = Spring-boot-Microservices/GatewayService
 	url = https://github.com/onlinejavafullstacktraining/GatewayServer.git
 
 
