@@ -1,76 +1,101 @@
-version: '2.1'
-# License Service docker configuration
+version: '3'
+volumes:
+  postgres_data:
+    driver: local
+
 services:
-  database:
-    image: postgres:latest
-    ports:
-      - "127.0.0.1:5432:5432"
-    environment:
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
-      POSTGRES_DB: "microservice"
+  postgres:
+    image: postgres
     volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
-      - ./data.sql:/docker-entrypoint-initdb.d/2-data.sql
-    networks:
-      backend:
-        aliases:
-          - "database"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-  configuration-service:
-    image: javatechnology/configuration-service:0.0.1-SNAPSHOT
-#    build:
-#      dockerfile: ConfigurationService/Dockerfile
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: password
+  keycloak:
+    image: quay.io/keycloak/keycloak:legacy
+    environment:
+      DB_VENDOR: POSTGRES
+      DB_ADDR: postgres
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_SCHEMA: public
+      DB_PASSWORD: password
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: Pa55w0rd
     ports:
-      - "8888:8888"
+      - 8080:8080
+    depends_on:
+      - postgres
+
+  Configuration-Service:
+    image: javatechnology/configuration-service:0.0.1-SNAPSHOT
+    ports:
+      - 8888:8888
     networks:
       backend:
         aliases:
-          - "configuration-service"
-  eureka-server:
+            - "configuration-service"
+    depends_on:
+      - keycloak
+
+  Eureka-Service:
     image: javatechnology/eureka-service:0.0.1-SNAPSHOT
     ports:
-      - "8761:8761"
-
-  licensing-service:
+      - 8761:8761
+    networks:
+      backend:
+        aliases:
+            - "eureka-service"
+    depends_on:
+      - keycloak
+  Gateway-Service:
+    image: javatechnology/gateway-service:0.0.1-SNAPSHOT
+    ports:
+      - 5555:5555
+    networks:
+      backend:
+        aliases:
+            - "gateway-service"
+    depends_on:
+      - keycloak
+      - Eureka-Service
+  License-Service:
     image: javatechnology/licensing-service:0.0.1-SNAPSHOT
     ports:
-      - "8080:8080"
+      - 9191:9191
+    networks:
+      backend:
+        aliases:
+            - "license-service"
 
+    depends_on:
+      - keycloak
+      - Configuration-Service
+      - Eureka-Service
+      - Gateway-Service
     environment:
       PROFILE: "dev"
-      SPRING_CONFIG_IMPORT: "optional:configserver:http://configuration-service:8888"
-      SERVER_PORT: "8080"
-      CONFIGSERVER_PORT: "8888"
-      DATABASESERVER_PORT: "5432"
-    depends_on:
-      configuration-service:
-        condition: service_started
-      database:
-        condition: service_healthy
-    networks:
-      - backend
-
-  organization-service:
+      SPRING_CONFIG_IMPORT: "optional:configserver:http://localhost:8888"
+  Organization-Service:
     image: javatechnology/organization-service:0.0.1-SNAPSHOT
     ports:
-      - "9090:9090"
+      - 9292:9292
+    networks:
+      backend:
+        aliases:
+            - "organization-service"
+
+    depends_on:
+      - keycloak
+      - Configuration-Service
+      - Eureka-Service
+      - Gateway-Service
     environment:
       PROFILE: "dev"
-      SPRING_CONFIG_IMPORT: "optional:configserver:http://configuration-service:8888"
-    depends_on:
-      configuration-service:
-        condition: service_started
-      database:
-        condition: service_healthy
-    networks:
-      - backend
-
+      SPRING_CONFIG_IMPORT: "optional:configserver:http://localhost:8888"
 networks:
   backend:
     driver: bridge
+
 
